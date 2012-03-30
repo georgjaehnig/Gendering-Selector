@@ -1,0 +1,42 @@
+Gendering Selector auf Websiten
+
+So, nachdem es schon etwas Zuspruch hab, mach ich hier mal einen neuen Thread auf. Worum geht's: Es soll eine Möglichkeit für Webmaster erstellt werden, Texte in mehreren Gendering-Varianten (Binnen-I, Gender-Gap, Generisches Maskulinum) anzubieten.
+
+Hab dazu mal einen kleinen Protypen erstellt:
+http://pastehtml.com/view/bt35h789g.html
+
+Es ist erstmal ganz einfach mit CSS und Javascript gelöst. Die einzelnen Gendering-Varianten werden auch nicht automatisch generiert, sondern müssen alle ausgeschrieben im HTML-Code vorliegen. Dadurch ist das ganze robuster. So sieht der Code aus:
+
+	<p>Piraten sind
+<span class="gendering binneni">PolitikerInnen</span>
+<span class="gendering gap">Politiker_innen</span>
+<span class="gendering femmasc">Politikerinnen und Politiker</span>
+<span class="gendering genfem">Politikerinnen</span>
+<span class="gendering slash">Politiker/innen</span>
+<span class="gendering genmasc">Politiker</span></p>
+
+Das von Hand zu schreiben wär natürlich anstrengend. Aber da können wir z.B. einen regulären Ausdruck anbieten, den man in verschiedenen Editoren anwenden kann. Man schreibt dann im Text z.B.
+
+Politiker°
+
+und diese Regex macht den oben stehenden HTML-Code:
+
+s/\S\+°/<span class="gendering binneni">\1Innen<\/span><span class="gendering gap">\1_innen<\/span><span class="gendering fe
+mmasc">\1innen und \1<\/span><span class="gendering genfem">\1innen<\/span><span class="gendering slash">\1\/innen<\/span><sp
+an class="gendering genmasc">\1<\/span>/g
+
+
+
+TODO:
+
+redaktionell:
+* Herausfinden, welche Gendering-Stile es gibt, am besten erstmal nur die 2-3 wesentlichen
+
+technisch:
+* Auswahl im Cookie merken
+* Browser-Header X-Accept-Gendering auslesen und Default anpassen
+* Aufräumen (Menü-Erstellung sauberer)
+
+
+
+

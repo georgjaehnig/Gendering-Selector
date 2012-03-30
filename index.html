@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>Gendering Selector</title>
+<!-- <script src="jquery-1.7.2.min.js"> </script> -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"> </script>
+
+	<style>
+
+.gendering {
+	display: none; /* Switch all off */
+}		
+.femmasc {
+	display: inline; /* Switch default on */
+}		
+
+	</style>
+	<script>
+
+function gendering_switch( style )
+{
+	$(".gendering").each( function() {
+		if ( $(this).hasClass(style) ) {
+			$(this).show();
+		} else {
+			$(this).hide();
+		}
+	});
+}
+
+$(document).ready(function() {
+	styles = {
+		binneni: 'Binnen-I',
+		gap: 'Gender-Gap', 
+		genmasc: 'Generisches Maskulinum', 
+		genfem: 'Generisches Femininum', 
+		slash: 'Schrägstrich'
+	};
+		$.each(styles, function(index, value) {
+			link = $('<a href="javascript:gendering_switch(\'' + index + '\');">' + value + '</a>');
+			link.click(gendering_switch(index));
+			$('#gendering-menu').append(link).append(' ');
+		});
+});
+
+	</script>
+</head>
+<body>
+
+<div id="gendering-menu"></div>
+
+	<p>Piraten sind
+<span class="gendering binneni">PolitikerInnen</span>
+<span class="gendering gap">Politiker_innen</span>
+<span class="gendering femmasc">Politikerinnen und Politiker</span>
+<span class="gendering genfem">Politikerinnen</span>
+<span class="gendering slash">Politiker/innen</span>
+<span class="gendering genmasc">Politiker</span></p>
+
+</body>
+</html>
